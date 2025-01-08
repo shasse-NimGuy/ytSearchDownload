@@ -8,6 +8,4 @@ Screenshot included of it working.
 
 Queries must still be formatted how they would in a real youtube search bar (search+search).
 
-Example ytAuto "Linux"
-
 ![yt_downloader](https://github.com/user-attachments/assets/222afd0b-f5b8-4dcb-83a9-9cce3295e1f3)
