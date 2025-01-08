@@ -37,7 +37,7 @@ proc main() =
     echo x
 
   for x in list:
-    echo x
+    echo "trying > ", x
     download(x)
     echo "Done with > ", x, "\n"
 
