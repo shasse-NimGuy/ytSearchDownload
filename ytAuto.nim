@@ -23,15 +23,16 @@ proc transform(sett: string): string =
     var temp: string
     temp = sett.replace("""video_id","value":""", "")
     temp = temp.replace(""""""", "")
-    return ret.add(temp)
+    ret.add(temp)
+    return ret
 
     
 
 proc getList(query: string): seq[string] =
     var check: string
-    var ret: string
+    var vid_id: string
     var count = 0
-    var video: seq[string]
+    var videos: seq[string]
     let info = getInfo(fmt"https://www.youtube.com/results?search_query={query}")
     for x in info:
         if x == 'v':
@@ -40,13 +41,13 @@ proc getList(query: string): seq[string] =
                     check.add(info[count + x])
                     if check == "video_id":
                         for x in 0 .. 30:
-                            ret.add(info[count + x])
+                            vid_id.add(info[count + x])
 
-                        video.add(transform(ret))
-                        ret = ""
+                        videos.add(transform(vid_id))
+                        vid_id = ""
                 check = ""
         count = count + 1
-    return video
+    return videos
 
 
 
@@ -60,8 +61,12 @@ proc main() =
         search = paramStr(1)
         echo "Quered > ", paramStr(1)
 
+    let list = getList(search)
+    for x in list:
+        echo x
 
-    for x in getList(search):
+
+    for x in list:
         echo x
         download(x)
         echo "Done with > ",x
